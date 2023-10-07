@@ -15,14 +15,12 @@ export default class login {
     return response;
   }
 
-  public static async appVersion(req: ProtectedRequest) {
+  public static async findUserByEmail(email:string) {
     const reqData = {
-      reqtype: 'getAppVersion',
-      ...req.params,
-      ...req.body,
-      ...req.query,
+      reqtype: 'userByEmail',
+      email:email
     };
-    const [response] = await querySync(Proc.login, reqData);
+    const response = await querySync(Proc.login, reqData);
     return response;
   }
 }
