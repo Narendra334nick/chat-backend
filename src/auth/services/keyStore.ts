@@ -13,7 +13,17 @@ export default class KeystoreService {
       accessTokenKey,
       refreshTokenKey,
     });
-    console.log('results',result);
+    console.log('key store created !!',result);
+  }
+
+
+  public static async findForAuth(loginId: string, key: string): Promise<any> {
+    const [res1, res2] = await querySync(proc.keystore, {
+      reqtype: 'getForAuth',
+      loginId,
+      key,
+    });
+    return { user: res1?.[0], keystore: res2?.[0] };
   }
 }
 

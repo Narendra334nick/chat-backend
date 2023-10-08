@@ -18,7 +18,6 @@ router.post(
 		if (!user) throw new BadRequestError("User not exists/Create account !!");
 		const match = await bcrypt.compare(password, user.password);
 		if (!match) throw new BadRequestError("Wrong password !!!");
-		//const passwordHash = await bcrypt.hash(req.body.password, 10);
 		const tokens = await getToken(user);
 		const [[data]] = await loginOperations.getLoginDetails(req);
 		return new SuccessResponse("Login details fetched successfully.", [
