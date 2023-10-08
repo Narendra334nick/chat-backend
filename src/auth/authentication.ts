@@ -6,11 +6,9 @@ import {
   TokenExpiredError,
 } from '../core/apiError';
 import JWT from '../core/jwt';
-//import { getAccessToken, validateTokenData } from '../auth/authUtils';
 import asyncHandler from '../core/asyncHandler';
 import KeystoreService from '../auth/services/keyStore';
 import Utils from '../helpers/utils';
-//import UserService from '../services/Users';
 import { getAccessToken , validateTokenData } from './authUtils';
 const router = express.Router();
 

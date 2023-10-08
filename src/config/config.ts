@@ -20,5 +20,8 @@ const config = {
 		issuer:"nick.co",
 		audience:"users",
 	},
+  corsConfig:{
+    url:"http://localhost:8086"
+  }
 };
 export default config;
