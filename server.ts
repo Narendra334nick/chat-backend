@@ -20,7 +20,7 @@ const io = new Server<
   SocketData
 >(httpServer, {
   cors: {
-    origin: `${config?.corsConfig?.url}`,
+    origin: `*`,
     methods: ['GET', 'POST'],
   },
 });

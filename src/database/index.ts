@@ -8,6 +8,7 @@ const options: PoolConfig = {
   user: config.db.user,
   database: config.db.name,
   password: config.db.password,
+  connectionLimit: 10, // Adjust the limit as needed
 };
 const pool = mysql.createPool(options);
 

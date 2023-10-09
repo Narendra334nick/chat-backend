@@ -12,7 +12,7 @@ const config = {
 	environment: "development",
 	tokenInfo: {
 		accessTokenValidityDays: parseInt(
-			"60h"
+			"7d"
 		),
 		refreshTokenValidityDays: parseInt(
 		 "2d"
