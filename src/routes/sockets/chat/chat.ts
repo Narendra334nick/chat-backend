@@ -1,17 +1,22 @@
+import { ProtectedRequest } from "../../../types/app-request";
+import { keys } from "../../../constant/socktKeys";
+import chatService from "./services";
+
 const chatSocket = (io: any) => {
   io.on('connection', function (socket: any) {
     console.log(
       '------------------------CHAT---CONNECTION---SUCCESSFULL--------------------------------------',
     );
-    // like post
-    // socket.on(eventKeys.like_post, async (keys: ObjectType) => {
-    //   const newReq: ProtectedRequest = {
-    //     ...socket,
-    //     body: keys,
-    //   };
-    //   const [data] = await CampusTimeLine.likePost(newReq);
-    //   io.sockets.emit(eventKeys.like_post_count, data);
-    // });
+    // recieve message from client
+    socket.on(keys.send_message, async (data:any) => {
+      const newReq: ProtectedRequest = {
+        ...socket.body,
+        ...socket.user,
+        ...data
+      };
+      const [res] = await chatService.saveMessage(newReq);
+      io.sockets.emit(keys.send_message_ack, res);
+    });
 
     //Whenever someone disconnects this piece of code executed
     socket.on('disconnect', function () {

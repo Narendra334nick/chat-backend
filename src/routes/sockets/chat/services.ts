@@ -2,11 +2,20 @@ import { ProtectedRequest } from '../../../types/app-request';
 import querySync from '../../../database/dbHandler';
 import Proc from '../../../database/model/mySqlProcedure';
 
-export default class chatGroupServices {
+export default class chatService {
   
-  public static async createGroup(req: ProtectedRequest) {
+  public static async saveMessage(req:any) {
     const reqData = {
-      reqtype: 'createGroup',
+      reqtype: 'saveMessage',
+      ...req
+    };
+    const response = await querySync(Proc.groupChats, reqData);
+    return response;
+  }
+
+  public static async updateUser(req: ProtectedRequest) {
+    const reqData = {
+      reqtype: 'updateUser',
       ...req.params,
       ...req.body,
       ...req.query,
@@ -16,20 +25,9 @@ export default class chatGroupServices {
     return response;
   }
 
-  public static async getGroups(req:ProtectedRequest) {
+  public static async getUser(req:ProtectedRequest) {
     const reqData = {
-      reqtype: 'getGroups',
-      ...req.params,
-      ...req.body,
-      ...req.query,
-      ...req.user
-    };
-    const response = await querySync(Proc.groupChats, reqData);
-    return response;
-  }
-  public static async getGroupsMessages(req: ProtectedRequest) {
-    const reqData = {
-      reqtype: 'getGroupsMessages',
+      reqtype: 'getUser',
       ...req.params,
       ...req.body,
       ...req.query,

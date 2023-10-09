@@ -29,4 +29,13 @@ router.post(
 	})
 );
 
+router.get(
+	"/messages/:groupId",
+	AsyncHandler(async (req: ProtectedRequest, res) => {
+    const [data] = await chatGroupServices.getGroupsMessages(req); 
+		return new SuccessResponse("Group fetched successfully !!", data).send(res);
+	})
+);
+
+
 export default router;
